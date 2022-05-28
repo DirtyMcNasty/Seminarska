@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Seminarska
 {
@@ -57,11 +59,11 @@ namespace Seminarska
         public static int counter;
         public static void Odpri()
         {
-            string fileName = "c:\\temp\\save";
+            //string fileName = "c:\\temp\\save";
             Array.Clear(activities, 0, activities.Length);
-            //counter = 0;
-            //Console.Write("Vnesite pot do datoteke: ");
-            //string fileName = Console.ReadLine();
+            counter = 0;
+            Console.Write("Vnesite pot do datoteke: ");
+            string fileName = Console.ReadLine();
 
             if (File.Exists(fileName))
             {
@@ -79,10 +81,6 @@ namespace Seminarska
                     act.Distance = int.Parse(entries[3]);
                     act.Climb = int.Parse(entries[4]);
                     activities[counter] = act;
-                    //for (int j = 0; j < 5; j++)
-                    //{
-                    //    activities[counter, j] = entries[j];
-                    //}
                     counter++;
                 }
                 reader.Close();
@@ -115,6 +113,7 @@ namespace Seminarska
         }
         public static void Aktivnosti()
         {
+            Console.WriteLine();
             Console.WriteLine("*****\tAktivnosti\t*****");
             for (int i = 0; i < counter; i++)
             {
@@ -173,11 +172,13 @@ namespace Seminarska
             }
             else
                 return ireturn;
+            Console.WriteLine();
         }
         public static void Total()
         {
-            Console.WriteLine("\tŠtevilo aktivnosti\t|\tSkupen čas\t|\tSkupna razdalja\t     |\t  Skupen vzpon\t");
-            Console.WriteLine("=======================================================================================================");
+
+
+
             int distance = 0;
             int climb = 0;
             TimeSpan ts;
@@ -195,11 +196,17 @@ namespace Seminarska
             {
                 climb = climb + activities[i].Climb;
             }
-            Console.WriteLine("\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t", noofactivity, ts, distance, climb);
+            Console.WriteLine();
+            Console.WriteLine("{0, 25}| {1, 15} | {2, 15} | {3, 15}|", "Število aktivnosti", "Skupen čas", "Skupna razdalja", "Skupen vzpon");
+            Console.WriteLine("=======================================================================================================");
+            Console.WriteLine("{0, 25}| {1, 15} | {2, 15} | {3, 15}|", noofactivity, ts, distance, climb);
+
+
             Console.ReadLine();
         }
         public static void Shrani()
         {
+            
             Console.Write("Ime in pot do datoteke: ");
             string fileName = Console.ReadLine();
             StreamWriter writer = File.CreateText(fileName);
