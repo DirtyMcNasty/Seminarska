@@ -97,6 +97,7 @@ namespace Seminarska
         }
         public static void Vnos()
         {
+            activities[counter] = new Activities();
             Console.WriteLine("*****\tVnos\t*****");
             Console.Write("Vnesite ime vožnje: ");
             activities[counter].Name = Console.ReadLine();
@@ -126,10 +127,22 @@ namespace Seminarska
         {
             int i = Iskanje();
             Console.WriteLine(i);
+            if (i == -1)
+            {
+                Console.WriteLine("Iskana aktivnost ni bila najdena");
+                return;
+            }
             Console.WriteLine(activities[i - 1].Name);
-            activities[i-1]= new Activities();
-            Array.Clear(activities, i - 1, 5);
-            Console.WriteLine(activities[i - 1].Name);
+            for (int x = i - 1; x < counter; x++)
+            {
+                if (x == 49)
+                    activities[x] = null;
+                else
+                {
+                    activities[x] = activities[x + 1];
+                }
+            }
+            counter--;
 
             Console.ReadLine();
         }
