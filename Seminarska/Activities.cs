@@ -11,7 +11,7 @@ namespace Seminarska
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateTime { get; set; }
-        public DateTime ActivityLength { get; set; }
+        public TimeSpan ActivityLength { get; set; }
         public int Distance { get; set; }
         public int Climb { get; set; }
     }
